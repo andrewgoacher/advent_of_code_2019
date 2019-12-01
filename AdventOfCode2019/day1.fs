@@ -2,6 +2,7 @@
 
 open System.IO
 module Day1=
+
     let get_lines file=
         File.ReadAllLines file
 
@@ -16,9 +17,8 @@ module Day1=
 
     let get_total_fuel lines=
         lines |>
-        Array.map fuel_for_mass |>
-        Array.sum
+        Array.map fuel_for_mass
 
-    let solve = get_lines >> map_to_numbers >> get_total_fuel
+    let solve_part_1 = get_lines >> map_to_numbers >> get_total_fuel >> Array.sum
         
 
