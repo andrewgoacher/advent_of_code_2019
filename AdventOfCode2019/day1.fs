@@ -1,7 +1,7 @@
 ﻿namespace adventofcode
 
 open System.IO
-module day1=
+module Day1=
     let get_lines file=
         File.ReadAllLines file
 
