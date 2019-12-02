@@ -35,7 +35,6 @@ module Day2=
 
     let rec step (list:int[]) i=
         let op = parse_op list i
-        printf "\n0 at %i = %i" i list.[0]
         match op with
         | Some t -> step (new_list list t) (i+4)
         | None -> list
