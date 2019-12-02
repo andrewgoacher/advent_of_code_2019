@@ -41,14 +41,35 @@ module Day2=
 
     let rec step_0 list=step list 0
 
-    let swap list=
+    let swap_core a b list=
         list |>
         Array.mapi (fun i x -> match i with
-                                | 1 -> 12
-                                | 2 -> 2
+                                | 1 -> a
+                                | 2 -> b
                                 | _ -> x)
+    let swap = swap_core 12 2
 
-    let get_new_list = get_list >> map_to_numbers >> swap >> step_0
+    let get_new_list file swap_fn=
+        get_list file |>
+        map_to_numbers |>
+        swap_fn |>
+        step_0
+
     let solve_part_1 file =
-        let list = get_new_list file
+        let list = get_new_list file swap
         list.[0]
+
+    let rec solve_for_noun file n v0=
+        let rec solve_for_verb v1=
+            let list = get_new_list file (swap_core n v1)
+            if list.[0]=19690720 then Some (n,v1)
+            else if v1>99 then None else solve_for_verb (v1+1)
+        match solve_for_verb v0 with
+        | Some a -> Some (a)
+        | None -> if n >99 then None else solve_for_noun file (n+1) v0
+
+    let solve_part_2 file=
+        match solve_for_noun file 1 1 with
+        | Some (n,v) -> (n*100)+v
+        | None -> failwith "Unknown shit happened"
+            
