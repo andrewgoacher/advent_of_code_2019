@@ -4,9 +4,10 @@ open System.IO
 module Day2=
     let (|Add|Mul|Halt|) n=
         match n with
-        | 1 -> Add n
-        | 2 -> Mul n
-        | 99 -> Halt n
+        | 1 -> Add
+        | 2 -> Mul
+        | 99 -> Halt
+        | _ -> failwith "Unexpected token"
 
     let get_list file=
         let contents = File.ReadAllText file
@@ -19,9 +20,9 @@ module Day2=
 
     let parse_op (list:int[]) i=
         match list.[i] with
-        | Add _ -> Some(add_op list list.[(i+1)] list.[(i+2)] list.[(i+3)])
-        | Mul _ -> Some(mul_op list list.[(i+1)] list.[(i+2)] list.[(i+3)])
-        | Halt _ -> None
+        | Add -> Some(add_op list list.[(i+1)] list.[(i+2)] list.[(i+3)])
+        | Mul -> Some(mul_op list list.[(i+1)] list.[(i+2)] list.[(i+3)])
+        | Halt -> None
 
     let map_item index index_to_map (old_val:int) (new_val:int)=
         if index=index_to_map then
@@ -41,12 +42,11 @@ module Day2=
 
     let rec step_0 list=step list 0
 
-    let swap_core a b list=
-        list |>
-        Array.mapi (fun i x -> match i with
-                                | 1 -> a
-                                | 2 -> b
-                                | _ -> x)
+    let swap_core (a:int) (b:int) (list:int[])=
+        list.[1] <- a
+        list.[2] <- b
+        list
+
     let swap = swap_core 12 2
 
     let get_new_list file swap_fn=
