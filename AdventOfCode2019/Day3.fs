@@ -10,29 +10,49 @@ let private (|Up|Down|Left|Right|) (vec:string)=
     | 'R' -> Right amount
     | x -> failwith (sprintf "What is this shit? %c" x)
 
-let private parse_line (acc:Line list * Point) (item:string)=
+type MegaLine = {line:Line;previous_line:Line option}
+
+let private parse_line (acc:MegaLine list * Point) (item:string)=
     let (arr, last) = acc
     let new_line = match item with
                     | Up u -> {a=last;b=(add_to_point last 0. u)}
                     | Down d -> {a=last;b=(add_to_point last 0. -d)}
                     | Left l -> {a=last;b=(add_to_point last -l 0.)}
                     | Right r -> {a=last;b=(add_to_point last r 0.)}
-    (new_line :: arr, new_line.b)
+
+    let prev = match List.length arr with
+               | 0 -> None
+               | x -> Some arr.[x-1].line
+
+
+    let l = {line=new_line;previous_line=prev ;}
+
+    (l :: arr, new_line.b)
 
 let private get_lines (str:string)=
     let (list,_) = str.Split "," |>
                    Array.fold parse_line ([], {x=0.;y=0.;})
     list
 
-let private check_intersection (item:Line) (list:Line list)=
+type Intersection = {linea:Line;lineb:Line;point:Point}
+
+let optional_intersection linea lineb=
+    let intersection = get_intersection_point linea lineb
+    match intersection with
+    | None -> None
+    | Some i -> Some {linea=linea;lineb=lineb;point=i}
+
+let private check_intersection (item:Line) (list:MegaLine list)=
     list |>
-    List.map (fun i -> get_intersection_point i item) |>
+    List.map (fun i -> optional_intersection item i.line) |>
     List.choose id
 
-let fold_intersection (acc:(Point list)) (item:Line) (lines:Line list)=
-    let items = check_intersection item lines
+let fold_intersection (acc:(Intersection list)) (item:MegaLine) (lines:MegaLine list)=
+    let items = check_intersection item.line lines
     if List.length items = 0 then acc
-    else List.append items acc
+    else
+        items |>
+        List.append acc
 
 let get_intersections str1 str2=
     let lines1 = get_lines str1
@@ -44,8 +64,8 @@ let get_intersections str1 str2=
 let solve_part_1 str1 str2=
     let origin = {x=0.;y=0.;}
     let distances = get_intersections str1 str2 |>
-                    List.map (fun i -> abs (get_manhattan_distance i origin)) |>
-                    List.sort 
+                    List.map (fun i -> abs (get_manhattan_distance i.point origin)) |>
+                    List.sort
     distances.[0]
 
 let solve file=
@@ -53,5 +73,4 @@ let solve file=
     printfn "Day 3\n"
     let part1 = solve_part_1 data.[0] data.[1]
     printfn "\t Part 1: %f" part1
-
-    
+// for part 2: Cache on each line the action to get there, and the previous index? walk backwards through the lines
