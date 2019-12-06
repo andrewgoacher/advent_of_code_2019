@@ -1,4 +1,4 @@
-﻿namespace adventofcode
+﻿    namespace adventofcode
 
 open System.IO
 module Day2=
@@ -72,4 +72,13 @@ module Day2=
         match solve_for_noun file 1 1 with
         | Some (n,v) -> (n*100)+v
         | None -> failwith "Unknown shit happened"
+
+    let solve file=
+        printfn "Day 2";
+        let part1 = (file |> solve_part_1)
+        let part2 = (file |> solve_part_2)
+        printfn "\tPart 1: %i" part1
+        if part1 <> 3931283 then failwith "Incorrect value for part 1!"
+        printfn "\tPart 2: %i" part2
+        if part2 <> 6979 then failwith "Incorrect value for part 2!"
             

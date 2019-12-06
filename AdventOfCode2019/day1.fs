@@ -13,7 +13,7 @@ module Day1=
     let solve_part_2 (data:float[])=collect data accumulate_all
 
     let solve file=
-        printfn "Day 1\n";
+        printfn "Day 1";
         let part1 = (file |> File.ReadAllLines |> Array.map float |> solve_part_1)
         let part2 = (file |> File.ReadAllLines |> Array.map float |> solve_part_2)
         printfn "\tPart 1: %i" part1

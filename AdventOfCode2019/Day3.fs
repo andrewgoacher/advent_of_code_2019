@@ -88,7 +88,7 @@ let solve_part_2 str1 str2=
 
 let solve file=
     let data = File.ReadAllLines file
-    printfn "Day 3\n"
+    printfn "Day 3"
     let part1 = solve_part_1 data.[0] data.[1]
     printfn "\t Part 1: %f" part1
     let part2 = solve_part_2 data.[0] data.[1]

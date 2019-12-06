@@ -83,7 +83,7 @@ let solve_part_2 items=
 let solve min max=
     let range = [min..max]
     let part1 = solve_part_1 range
-    printf "Day 4:\n"
-    if part1 <> 2814 then failwith "\tPart 1 has incorrect answer" else printf "\tPart 1: %i\n" part1
+    printfn "Day 4:"
+    if part1 <> 2814 then failwith "\tPart 1 has incorrect answer" else printfn "\tPart 1: %i" part1
     let part2 = solve_part_2 range
-    if part2 <> 1991 then failwith "\t Part 2 has incorrect answer" else  printf "\tPart 2: %i\n" part2
+    if part2 <> 1991 then failwith "\t Part 2 has incorrect answer" else  printfn "\tPart 2: %i" part2

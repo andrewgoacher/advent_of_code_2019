@@ -69,7 +69,6 @@
                 else None
                     
 
-    
     let get_intersection_point (line1:Line) (line2:Line)=
         if intersects line1 line2 then
             line_segment_intersects line1 line2
