@@ -5,3 +5,9 @@ let (|Int|_|) (str:string) =
    | true -> Some(result)
    | _ -> None
 
+let perf fn=
+    let watch  = System.Diagnostics.Stopwatch.StartNew()
+    let result = fn()
+    let elapsed = watch.ElapsedMilliseconds
+    (result,elapsed)
+

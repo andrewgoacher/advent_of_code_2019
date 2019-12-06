@@ -22,9 +22,14 @@ let main argv =
         
 
     match parsed_result with
-    | -1 -> days |> List.map (fun f -> f()) |> ignore
+    | -1 -> days |> 
+            List.mapi (fun i f -> 
+                let (_,time) = perf f
+                printfn "Time for Day %i is %ims\n" (i+1) time) |>
+            ignore
     | 0 -> failwith "We don't count from programmer 1 here!"
     | x when x <= List.length days ->
-        days.[x-1]()
+        let (_,time) = perf days.[x-1]
+        printfn "Time for Day %i is %ims\n" (x) time
     | _ -> printfn "Unknown option"  
     0 // return an integer exit code
