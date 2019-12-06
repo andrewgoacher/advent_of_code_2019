@@ -1,7 +1,6 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
-open adventofcode
 open Common
 
 [<EntryPoint>]
