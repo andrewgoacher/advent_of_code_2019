@@ -10,8 +10,8 @@ let ``intersects - lines parrallel - do not intersect``()=
     let p3 = {x=10.;y=3.;}
     let p4 = {x=10.;y=4.;}
 
-    let line1={a=p1;b=p2}
-    let line2={a=p3;b=p4}
+    let line1={a=p1;b=p2;dir=""}
+    let line2={a=p3;b=p4;dir=""}
 
     intersects line1 line2 |> should be False
 
@@ -22,8 +22,8 @@ let ``intersects - lines cross - should intersect``()=
     let p3 = {x=2.;y=0.;}
     let p4 = {x=(-2.);y=4.;}
 
-    let line1={a=p1;b=p2}
-    let line2={a=p3;b=p4}
+    let line1={a=p1;b=p2;dir=""}
+    let line2={a=p3;b=p4;dir=""}
 
     intersects line1 line2 |> should be True
 
@@ -34,8 +34,8 @@ let ``2 lines that if infinate would intersect, should not intersect``()=
     let p3 = {x=5.;y=5.;}
     let p4 = {x=10.;y=0.;}
 
-    let line1={a=p1;b=p2}
-    let line2={a=p3;b=p4}
+    let line1={a=p1;b=p2;dir=""}
+    let line2={a=p3;b=p4;dir=""}
 
     intersects line1 line2 |> should be False
 
@@ -46,8 +46,8 @@ let ``2 parallell lines will not have an intersection point``()=
     let p3 = {x=10.;y=3.;}
     let p4 = {x=10.;y=4.;}
 
-    let line1={a=p1;b=p2}
-    let line2={a=p3;b=p4}
+    let line1={a=p1;b=p2;dir=""}
+    let line2={a=p3;b=p4;dir=""}
 
     get_intersection_point line1 line2 |> should equal None
 
@@ -58,8 +58,8 @@ let ``2 intersecting lines will have an intersection``()=
     let p3 = {x=2.;y=0.;}
     let p4 = {x=(-2.);y=4.;}
 
-    let line1={a=p1;b=p2}
-    let line2={a=p3;b=p4}
+    let line1={a=p1;b=p2;dir=""}
+    let line2={a=p3;b=p4;dir=""}
 
     let expected = {x=1.;y=1.;}
     let actual = get_intersection_point line1 line2
@@ -74,7 +74,7 @@ let ``if 2 lines share a point, they are not considered to be intersecting``()=
     let p3 = {x=0.;y=0.;}
     let p4 = {x=(-2.);y=4.;}
     
-    let line1={a=p1;b=p2}
-    let line2={a=p3;b=p4}
+    let line1={a=p1;b=p2;dir=""}
+    let line2={a=p3;b=p4;dir=""}
     
     intersects line1 line2 |> should be False

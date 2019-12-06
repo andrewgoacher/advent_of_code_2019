@@ -1,6 +1,6 @@
 ﻿module Geometry
     type Point = {x:float;y:float}
-    type Line = {a:Point;b:Point;}
+    type Line = {a:Point;b:Point;dir:string}
 
     let private direction p1 p2 p3=
         let v = (p2.y-p1.y) * (p3.x-p2.x)-(p2.x-p1.x)*(p3.y-p2.y)
@@ -49,6 +49,9 @@
     let zero_or_near_as_dammit x=
         let epsilon = 1e-10
         abs x < epsilon
+
+    let unit_length line=
+        abs (line.a.x - line.b.x) + abs(line.a.y - line.b.y)
 
     let line_segment_intersects line1 line2=
         let r = sub_points line1.b line1.a
