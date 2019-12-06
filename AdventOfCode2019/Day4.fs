@@ -18,17 +18,25 @@ let rec has_no_decreasing_numbers num_list prev current=
                 | None -> false
                 | Some p -> c >= p
 
-let (|Match|_|) pattern input =
-    let m = Regex.Match(input, pattern) in
-    if m.Success then Some(true) else None
+let rec double_filter prev current num_list=
+    match num_list with
+    | h :: rest -> 
+        match current with
+        | None -> double_filter None (Some h) rest
+        | Some c ->
+            match prev with
+            | None -> double_filter current (Some h) rest
+            | Some p -> if p = c then true else (double_filter current (Some h) rest)
+    | [] ->
+       match current with
+       | None -> failwith "Shouldn't get here"
+       | Some c ->
+           match prev with
+           | None -> failwith "Shouldn't her here either"
+           | Some p -> p = c
 
-let contains_double value = 
-    match value with
-        | Match "11+|22+|33+|44+|55+|66+|77+|88+|99+|00+" _ -> true
-        | _ -> false
-
-let filter_doubles (num)=
-    num |> contains_double
+let contains_double num=
+    (string num).ToCharArray() |> Array.toList |> (double_filter None None)
 
 let solve_part_1 items=
     items
