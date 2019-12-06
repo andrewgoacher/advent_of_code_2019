@@ -41,4 +41,5 @@ let solve min max=
     let range = [min..max]
     let part1 = solve_part_1 range
     printf "Day 4:\n"
-    printf "\tPart 1: %i" part1
+    if part1 <> 2814 then failwith "\tPart 1 has incorrect answer" else printf "\tPart 1: %i" part1
+    
