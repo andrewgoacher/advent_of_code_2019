@@ -35,12 +35,12 @@ let parse_op (mem:Memory) (pc:ProgramCounter)=
     let (op,increment) = match op with
              | 1 -> Add(get_value_mem mode1 mem.[pc+1],get_value_mem mode2 mem.[pc+2],get_value_mem mode3 (pc+3)), 4
              | 2 -> Mul(get_value_mem mode1 mem.[pc+1],get_value_mem mode2 mem.[pc+2],get_value_mem mode3 (pc+3)), 4
-             | 3 -> Store(mem.[pc+1]), 2 
-             | 4 -> Retrieve(mem.[pc+1]),2
+             | 3 -> Store((*get_value_mem mode1 *)mem.[pc+1]), 2 
+             | 4 -> Retrieve((*get_value_mem mode1 *) mem.[pc+1]),2
              | 5 -> JumpIfTrue(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2]), 3
              | 6 -> JumpIfFalse(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2]),3
-             | 7 -> LessThan(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2], get_value_mem mode3 mem.[pc+3]), 4
-             | 8 -> Equals(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2], get_value_mem mode3 mem.[pc+3]), 4
+             | 7 -> LessThan(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2], mem.[pc+3]), 4
+             | 8 -> Equals(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2], mem.[pc+3]), 4
              | 99 -> Halt,0
              | _ -> failwith (sprintf "Unknown token: %i from %i" op mem.[pc])
     (op, pc+increment)
