@@ -7,12 +7,12 @@ let private swap (a:int) (b:int) (memory:Memory)=
     memory
 
 let solve_part_1 arr =
-    let memory = Array.copy arr |> swap 12 2 |> run 0
+    let memory,_ = Array.copy arr |> swap 12 2 |> run 0 0
     memory.[0]
 
 let rec private solve_for_noun arr n v0=
     let rec solve_for_verb v1=
-        let memory = Array.copy arr |> swap n v1 |> run 0
+        let memory,_ = Array.copy arr |> swap n v1 |> run 0 0
         if memory.[0]=19690720 then Some (n,v1)
         else if v1>99 then None else solve_for_verb (v1+1)
     match solve_for_verb v0 with

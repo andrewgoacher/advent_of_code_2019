@@ -29,10 +29,12 @@ let parse_op (mem:Memory) (pc:ProgramCounter)=
     let (op, mode1, mode2, mode3) = split_operands mem.[pc]
     let get_value_mem = get_value mem
     let (op,increment) = match op with
-             | 1 -> Add(get_value_mem mode1 mem.[pc+1],get_value_mem mode2 mem.[pc+2],mem.[pc+3]), 4
-             | 2 -> Mul(get_value_mem mode1 mem.[pc+1],get_value_mem mode2 mem.[pc+2],mem.[pc+3]), 4
+             | 1 -> Add(get_value_mem mode1 mem.[pc+1],get_value_mem mode2 mem.[pc+2],get_value_mem mode3 (pc+3)), 4
+             | 2 -> Mul(get_value_mem mode1 mem.[pc+1],get_value_mem mode2 mem.[pc+2],get_value_mem mode3 (pc+3)), 4
+             | 3 -> Store(mem.[pc+1]), 2 
+             | 4 -> Retrieve(mem.[pc+1]),2
              | 99 -> Halt,0
-             | _ -> failwith (sprintf "Unknown token: %i" mem.[pc])
+             | _ -> failwith (sprintf "Unknown token: %i from %i" op mem.[pc])
     (op, pc+increment)
 
 let load_memory_from_file file delim=
@@ -48,10 +50,19 @@ let mul_mem (mem:Memory) lhs rhs i=
     mem.[i] <- lhs * rhs
     mem
 
-let rec run (pc:ProgramCounter) (memory:Memory)=
+let rec private run_internal (pc:ProgramCounter) (input:int) (outputs:int list) (memory:Memory)=
     let (op, counter) = parse_op memory pc
+    let output = outputs
     match op with
-    | Add (l,r,i) -> run counter (add_mem memory l r i)
-    | Mul (l,r,i) ->  run counter (mul_mem memory l r i)
-    | Halt -> memory
+    | Add (l,r,i) -> run_internal counter input output (add_mem memory l r i) 
+    | Mul (l,r,i) ->  run_internal counter input output (mul_mem memory l r i) 
+    | Store addr ->
+        memory.[addr] <- input
+        run_internal counter input output memory
+    | Retrieve addr ->
+        run_internal counter input (memory.[addr] :: output) memory
+    | Halt -> (memory, output)
     | _ -> failwith "Unknown additional operand"
+
+let run (pc:ProgramCounter) (input:int) (memory:Memory)=
+    run_internal pc input [] memory
