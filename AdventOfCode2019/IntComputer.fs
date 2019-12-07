@@ -9,6 +9,10 @@ type Operand=
 | Mul of lhs:int * rhs:int * addr:int
 | Store of pos:int
 | Retrieve of pos:int
+| JumpIfTrue of condition:int * addr:int
+| JumpIfFalse of condition:int * addr:int
+| LessThan of lhs:int * rhs:int * addr:int
+| Equals of lhs:int * rhs:int * addr:int
 | Halt
 
 let private split_operands (num:int)=
@@ -33,6 +37,10 @@ let parse_op (mem:Memory) (pc:ProgramCounter)=
              | 2 -> Mul(get_value_mem mode1 mem.[pc+1],get_value_mem mode2 mem.[pc+2],get_value_mem mode3 (pc+3)), 4
              | 3 -> Store(mem.[pc+1]), 2 
              | 4 -> Retrieve(mem.[pc+1]),2
+             | 5 -> JumpIfTrue(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2]), 3
+             | 6 -> JumpIfFalse(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2]),3
+             | 7 -> LessThan(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2], get_value_mem mode3 mem.[pc+3]), 4
+             | 8 -> Equals(get_value_mem mode1 mem.[pc+1], get_value_mem mode2 mem.[pc+2], get_value_mem mode3 mem.[pc+3]), 4
              | 99 -> Halt,0
              | _ -> failwith (sprintf "Unknown token: %i from %i" op mem.[pc])
     (op, pc+increment)
@@ -61,6 +69,20 @@ let rec private run_internal (pc:ProgramCounter) (input:int) (outputs:int list) 
         run_internal counter input output memory
     | Retrieve addr ->
         run_internal counter input (memory.[addr] :: output) memory
+    | JumpIfTrue (condition, addr) ->
+        let c = if condition > 0 then addr else counter
+        run_internal c input output memory
+    | JumpIfFalse (condition, addr) ->
+        let c = if condition = 0 then addr else counter
+        run_internal c input output memory
+    | LessThan (lhs,rhs,addr) -> 
+        let v = if lhs < rhs then 1 else 0
+        memory.[addr] <- v
+        run_internal counter input output memory
+    | Equals (lhs,rhs,addr) ->
+        let v = if lhs = rhs then 1 else 0
+        memory.[addr] <- v
+        run_internal counter input output memory
     | Halt -> (memory, output)
     | _ -> failwith "Unknown additional operand"
 
