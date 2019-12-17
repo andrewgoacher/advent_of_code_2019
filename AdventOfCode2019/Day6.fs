@@ -16,4 +16,5 @@ let solve file =
     if part1 <> 621125 then failwith "\tPart 1 doesn't not have required result"
     else printfn "\tPart 1: %i" part1
     let part2 = (array |> solve_part_2)
-    printfn "\tPart 2: %i" part2
+    if part2 <> 550 then failwith "\tPart 2 doesn't not have required result"
+    else printfn "\tPart 2: %i" part2
