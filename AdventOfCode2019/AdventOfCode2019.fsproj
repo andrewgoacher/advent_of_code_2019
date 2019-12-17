@@ -6,17 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Types.fs" />
     <Compile Include="Common.fs" />
     <Compile Include="Orbit.fs" />
     <Compile Include="IntComputer.fs" />
     <Compile Include="Geometry.fs" />
-    <Compile Include="Day1.fs" />
-    <Compile Include="Day2.fs" />
-    <Compile Include="Day3.fs" />
-    <Compile Include="Day4.fs" />
-    <Compile Include="Day5.fs" />
-    <Compile Include="Day6.fs" />
-    <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +29,13 @@
     <Content Include="data\day_6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Compile Include="Challenges\Day1.fs" />
+    <Compile Include="Challenges\Day2.fs" />
+    <Compile Include="Challenges\Day3.fs" />
+    <Compile Include="Challenges\Day4.fs" />
+    <Compile Include="Challenges\Day5.fs" />
+    <Compile Include="Challenges\Day6.fs" />
+    <Compile Include="Program.fs" />
   </ItemGroup>
 
 </Project>

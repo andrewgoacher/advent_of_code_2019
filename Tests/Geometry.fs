@@ -1,7 +1,8 @@
 ﻿module Geometry
 open NUnit.Framework
 open FsUnit
-open Geometry
+open AdventOfCode2019.Geometry
+open AdventOfCode2019.Types.Math
 
 [<Test>]
 let ``intersects - lines parrallel - do not intersect``()=

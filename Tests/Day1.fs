@@ -1,6 +1,7 @@
 module ``Completed Challenges``
     open NUnit.Framework
     open FsUnit
+    open AdventOfCode2019.Challenges
 
     [<Test>]
     let ``Day 1: Part 1 - Single mass calculation`` ()=

@@ -1,4 +1,4 @@
-﻿module Day1
+﻿module AdventOfCode2019.Challenges.Day1
 open System.IO
 let fuel_for_mass mass= (floor (mass/3.))-2.
 let rec total_fuel_for_mass mass=

@@ -1,4 +1,5 @@
-﻿module Orbit
+﻿module AdventOfCode2019.Orbit
+open Types.Orbit
 
 let private spltData (data: string) =
     let split = data.Split(")")
@@ -7,12 +8,7 @@ let private spltData (data: string) =
 let private createOrbits (data: string list) =
     data |> List.map spltData
 
-type OrbitNode =
-    { Name: string
-      Parent: string option
-      Children: string [] }
 
-type OrbitNodes = OrbitNode []
 
 let private tryFindNode key nodes =
     let potential = nodes |> Array.tryFindIndex (fun i -> i.Name = key)

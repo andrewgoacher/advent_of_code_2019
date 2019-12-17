@@ -1,5 +1,5 @@
-﻿module Day5
-open IntComputer
+﻿module AdventOfCode2019.Challenges.Day5
+open AdventOfCode2019.IntComputer
 
 let solve_part_1 arr=
     let _,outputs = Array.copy arr |> run 0 1

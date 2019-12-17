@@ -1,4 +1,4 @@
-﻿module Day4
+﻿module AdventOfCode2019.Challenges.Day4
 
 open System.Text.RegularExpressions
 

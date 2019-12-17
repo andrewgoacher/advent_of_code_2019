@@ -1,19 +1,7 @@
-﻿module IntComputer
+﻿module AdventOfCode2019.IntComputer
 open System.IO
+open Types.Computer
 
-type Memory = int[]
-type ProgramCounter = int
-
-type Operand=
-| Add of lhs:int * rhs:int * addr:int
-| Mul of lhs:int * rhs:int * addr:int
-| Store of pos:int
-| Retrieve of pos:int
-| JumpIfTrue of condition:int * addr:int
-| JumpIfFalse of condition:int * addr:int
-| LessThan of lhs:int * rhs:int * addr:int
-| Equals of lhs:int * rhs:int * addr:int
-| Halt
 
 let private split_operands (num:int)=
     let u = num%10

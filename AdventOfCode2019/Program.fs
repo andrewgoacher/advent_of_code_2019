@@ -1,7 +1,8 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
-open Common
+open AdventOfCode2019.Common
+open AdventOfCode2019.Challenges
 
 [<EntryPoint>]
 let main argv =

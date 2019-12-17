@@ -1,6 +1,7 @@
 ﻿module Day5
 open NUnit.Framework
 open FsUnit
+open AdventOfCode2019.Challenges
 
 [<Test>]
 let ``The following code with positional mode will produce output 1 if input is 8 and otherwise 0``()=

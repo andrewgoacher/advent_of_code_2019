@@ -1,6 +1,7 @@
 ﻿module Day6
 open NUnit.Framework
 open FsUnit
+open AdventOfCode2019.Challenges
 
 [<Test>]
 let ``The sample orbit will produce the correct result``()=

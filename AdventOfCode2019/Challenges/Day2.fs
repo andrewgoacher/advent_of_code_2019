@@ -1,5 +1,6 @@
-﻿module Day2
-open IntComputer
+﻿module AdventOfCode2019.Challenges.Day2
+open AdventOfCode2019.IntComputer
+open AdventOfCode2019.Types.Computer
 
 let private swap (a:int) (b:int) (memory:Memory)=
     memory.[1] <- a

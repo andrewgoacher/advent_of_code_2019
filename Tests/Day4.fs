@@ -1,7 +1,7 @@
 ﻿module Day4
 open NUnit.Framework
 open FsUnit
-open Day4
+open AdventOfCode2019.Challenges
 
 [<Test>]
 let ``Small list gives expected result``()=

@@ -1,4 +1,5 @@
-﻿module Day6
+﻿module AdventOfCode2019.Challenges.Day6
+open AdventOfCode2019
 
 open System.IO
 

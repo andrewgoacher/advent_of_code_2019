@@ -1,5 +1,6 @@
-﻿module Day3
-open Geometry
+﻿module AdventOfCode2019.Challenges.Day3
+open AdventOfCode2019.Geometry
+open AdventOfCode2019.Types.Math
 open System.IO
 let private (|Up|Down|Left|Right|) (vec:string)=
     let (dir,amount) = (vec.[0],float vec.[1..])

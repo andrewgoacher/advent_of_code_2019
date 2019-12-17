@@ -1,4 +1,4 @@
-﻿module Common
+﻿module AdventOfCode2019.Common
 let (|Int|_|) (str:string) =
    let mutable result = 0
    match System.Int32.TryParse(str, &result) with

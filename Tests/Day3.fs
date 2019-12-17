@@ -2,7 +2,7 @@
 
 open NUnit.Framework
 open FsUnit
-open Day3
+open AdventOfCode2019.Challenges.Day3
 
 [<Test>]
 let ``for a small sample set, the number of intersections should be correct``()=
