@@ -14,6 +14,7 @@ let main argv =
          (fun () -> (Day3.solve "data/day_3.txt"))
          (fun () -> (Day4.solve 109165 576723))
          (fun () -> (Day5.solve "data/day_5.txt"))
+         (fun () -> (Day6.solve "data/day_6.txt"))
     ]
 
     let parsed_result = match result with

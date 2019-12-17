@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Compile Include="Common.fs" />
+    <Compile Include="Orbit.fs" />
     <Compile Include="IntComputer.fs" />
     <Compile Include="Geometry.fs" />
     <Compile Include="Day1.fs" />
@@ -14,6 +15,7 @@
     <Compile Include="Day3.fs" />
     <Compile Include="Day4.fs" />
     <Compile Include="Day5.fs" />
+    <Compile Include="Day6.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -28,6 +30,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="data\day_5.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\day_6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
