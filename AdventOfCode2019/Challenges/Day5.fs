@@ -10,7 +10,7 @@ let solve_part_2 arr input=
     outputs.[0]
 
 let solve file=
-    let orig_memory = (load_memory_from_file file [|','|])
+    let orig_memory = (loadMemoryFromFile file [|','|])
     printfn "Day 5";
     let part1 = (orig_memory |> solve_part_1)
     if part1 <> 15097178 then failwith "\tPart 1 doesn't not have required result" else printfn "\tPart 1: %i" part1

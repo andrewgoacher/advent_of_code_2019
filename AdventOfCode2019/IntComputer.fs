@@ -1,8 +1,5 @@
 ﻿module AdventOfCode2019.IntComputer
 open System.IO
-open Types.Computer
-
-
 let private split_operands (num:int)=
     let u = num%10
     let t = ((num/10)%10)*10
@@ -33,7 +30,7 @@ let parse_op (mem:Memory) (pc:ProgramCounter)=
              | _ -> failwith (sprintf "Unknown token: %i from %i" op mem.[pc])
     (op, pc+increment)
 
-let load_memory_from_file file delim=
+let loadMemoryFromFile file delim=
     let contents = File.ReadAllText file
     contents.Split delim |>
     Array.map int

@@ -1,6 +1,4 @@
 ﻿module AdventOfCode2019.Orbit
-open Types.Orbit
-
 let private spltData (data: string) =
     let split = data.Split(")")
     (split.[0]), split.[1]

@@ -27,7 +27,10 @@
           <e p="day_5.txt" t="Include" />
           <e p="day_6.txt" t="Include" />
         </e>
-        <e p="Geometry.fs" t="Include" />
+        <e p="Geometry" t="Include">
+          <e p="Line.fs" t="Include" />
+          <e p="Point.fs" t="Include" />
+        </e>
         <e p="IntComputer.fs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="Orbit.fs" t="Include" />
